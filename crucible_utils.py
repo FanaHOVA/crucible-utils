@@ -4,11 +4,9 @@ import dotenv
 
 dotenv.load_dotenv()
 
-CHALLENGE = "test"
 CRUCIBLE_URL = "https://crucible.dreadnode.io"
-CHALLENGE_URL = "https://test.crucible.dreadnode.io"
 
-def query(input_data, challenge_url=CHALLENGE_URL):
+def query(input_data, challenge_url):
     response = requests.post(
         f"{challenge_url}/score",
         headers={"Authorization": os.getenv("CRUCIBLE_API_KEY")},
@@ -16,7 +14,7 @@ def query(input_data, challenge_url=CHALLENGE_URL):
     )
     return response.json()
 
-def submit_flag(flag, challenge=CHALLENGE, crucible_url=CRUCIBLE_URL):
+def submit_flag(flag, challenge, crucible_url=CRUCIBLE_URL):
     url = f"{crucible_url}/api/submit-flag"
     headers = {"Authorization": os.getenv("CRUCIBLE_API_KEY")}
     payload = {"challenge": challenge, "flag": flag}
